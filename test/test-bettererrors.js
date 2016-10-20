@@ -37,6 +37,19 @@ exports.testEqual = function (test) {
     }
 };
 
+exports.testEqualNull = function (test) {
+    try {
+        assert.equal(null, false);
+    } catch (error) {
+        var betterErrorString = betterErrorStringFromError(error);
+        performBasicChecks(betterErrorString);
+        betterErrorString.should.include("null");
+        betterErrorString.should.include("false");
+        betterErrorString.should.include("==");
+        test.done();
+    }
+};
+
 /**
  * Test an AssertionError that does not contain actual, expected or operator values.
  * @param test the test object from nodeunit
